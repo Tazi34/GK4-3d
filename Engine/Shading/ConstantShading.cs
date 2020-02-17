@@ -14,7 +14,7 @@ namespace GK_4.Engine.Shading
     {
         private Color color;
 
-        public ConstantShading(NewTriangle currentTriangle, List<Light> lights) : base(currentTriangle,lights)
+        public ConstantShading(NewTriangle currentTriangle, List<Light> lights, Camera camera) : base(currentTriangle,lights, camera)
         {
             CurrentTriangle = currentTriangle;
         }

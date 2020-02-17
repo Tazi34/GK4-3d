@@ -36,7 +36,7 @@ namespace GK_4.Engine.Shading
             
             foreach (var l in Lights)
             {
-                var color = (l as PointLight).CalculateLight(CurrentTriangle, modelVertex.Position, modelVertex.NormalVector);
+                var color = (l as PointLight).CalculateLight(CurrentTriangle, modelVertex.Position, modelVertex.NormalVector,Camera.Position);
                 R += color.R;
                 B += color.B;
                 G += color.G;
@@ -73,7 +73,7 @@ namespace GK_4.Engine.Shading
             var color = Light.CorrectColor(r, g, b);
             return color;
         }
-        public GouraudShading(NewTriangle currentTriangle, List<Light> lights) : base(currentTriangle,lights) {
+        public GouraudShading(NewTriangle currentTriangle, List<Light> lights,Camera camera) : base(currentTriangle,lights,camera) {
             CurrentTriangle = currentTriangle;
         }
 

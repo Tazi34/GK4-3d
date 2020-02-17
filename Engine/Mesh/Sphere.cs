@@ -33,20 +33,28 @@ namespace GK_4.Engine.Mesh
     
             for (int i = 0; i < indices.Count; i += 3)
             {
-                var normal = AlgebraUtils.CalculateNormalVector(Vertices[indices[i]], Vertices[indices[i + 1]], Vertices[indices[i + 2]]);
-                normal = normal.Divide(normal.Norm(2));
+                //var normal = AlgebraUtils.CalculateNormalVector(Vertices[indices[i]], Vertices[indices[i + 1]], Vertices[indices[i + 2]]);
+                
                 Triangles.Add(
                     new NewTriangle
                     {
-                        A = new ModelVertex { Position = Vertices[indices[i]], NormalVector = normal },
-                        B = new ModelVertex { Position = Vertices[indices[i + 1]], NormalVector = normal },
-                        C = new ModelVertex { Position = Vertices[indices[i + 2]], NormalVector = normal },
+                        A = new ModelVertex { Position = Vertices[indices[i]], NormalVector = CalculateNormalVector(Vertices[indices[i]]) },
+                        B = new ModelVertex { Position = Vertices[indices[i + 1]], NormalVector = CalculateNormalVector(Vertices[indices[i+1]]) },
+                        C = new ModelVertex { Position = Vertices[indices[i + 2]], NormalVector = CalculateNormalVector(Vertices[indices[i+2]]) },
                         Color = Color.Red
-                    }); ;
-               
-            }
-            //Triangles.ForEach(el => Console.WriteLine(el));
+                    });
 
+            }
+
+        }
+        private Vector<double> CalculateNormalVector(Vector<double> position) {
+            var length = Math.Sqrt(position[0] * position[0] + position[1] * position[1] + position[2] * position[2]);
+            var vector = CreateVector.Dense<double>(4);
+            vector[0] = position[0] / length;
+            vector[1] = position[1] / length;
+            vector[2] = position[2] / length;
+            vector[3] = 0;
+            return vector;
         }
     }
 }

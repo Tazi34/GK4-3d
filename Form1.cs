@@ -32,6 +32,7 @@ namespace GK_4
         private List<Light> lights = new List<Light>();
         private ProjectionTransformation projectionTransformation;
         private Shading shading;
+        
 
         private Camera camera = new Camera
         {
@@ -43,8 +44,8 @@ namespace GK_4
         private List<Mesh> meshes = new List<Mesh>();
         public Form1()
         {
-            lights.Add(new PointLight { Position = //camera.Position });
-                    CreateVector.Dense(new double[] { 2, 2, 2, 1 }) });
+            lights.Add(new PointLight { Position =// camera.Position });
+                   CreateVector.Dense(new double[] { 2, 2, 2, 1 }) });
                                                                        //pointLight = new PointLight { Position = camera.Position };
             InitializeComponent();
            
@@ -55,11 +56,11 @@ namespace GK_4
 
             cameraTransformation = new CameraTransformation(camera);
             projectionTransformation = new ProjectionTransformation(pictureBox1.Width, pictureBox1.Height); ;
-            //timer1.Start();
+            timer1.Start();
 
-            shading = new ConstantShading(null, lights);
-            //shading = new GouraudShading(null, lights);
-            //shading = new PhongShading(null, lights);
+            //shading = new ConstantShading(null, lights,camera);
+            shading = new GouraudShading(null, lights,camera);
+            //shading = new PhongShading(null, lights,camera);
 
             PaintScene();
         }
@@ -119,7 +120,7 @@ namespace GK_4
         }
         private void timer1_Tick(object sender, EventArgs e)
         {
-            angle += 0.05;
+            angle += 0.1;
             rotationMatrix = TransformationBuilder.GetYRotationMatrix(angle);
             //* TransformationBuilder.GetXRotationMatrix(angle)*TransformationBuilder.GetZRotationMatrix(angle);
                                                                              //var radius = 3;
@@ -214,11 +215,7 @@ namespace GK_4
                                 zBuffor[j][k] = z;
                                 
                                 var color = shader.GetColor(j, k,(int)z);
-                                if(pixelsColors[j,k].R > 0)
-                                    Console.WriteLine($"{j} {k} {z}  {color}");
-                                //var color = triangle.Color;
                                 pixelsColors[j, k] = color;
-                                //g.FillRectangle(new SolidBrush(color), j, k, 1, 1);
                             }
                         }
                     }

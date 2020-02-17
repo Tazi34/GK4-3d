@@ -12,7 +12,7 @@ namespace GK_4.Engine.Shading
 {
     class PhongShading : Shading
     {
-        public PhongShading(NewTriangle currentTriangle, List<Light> lights) : base(currentTriangle, lights)
+        public PhongShading(NewTriangle currentTriangle, List<Light> lights,Camera camera) : base(currentTriangle, lights,camera)
         {
             CurrentTriangle = currentTriangle;
         }
@@ -26,13 +26,13 @@ namespace GK_4.Engine.Shading
 
             foreach (var l in Lights)
             {
-                var color = (l as PointLight).CalculateLight(CurrentTriangle, CreateVector.Dense(new double[] {x,y,z,1 }), CurrentTriangle.A.NormalVector);
+                var color = (l as PointLight).CalculateLight(CurrentTriangle, CreateVector.Dense(new double[] {x,y,z,1 }), CurrentTriangle.A.NormalVector,Camera.Position);
                 R += color.R;
                 B += color.B;
                 G += color.G;
             }
             var color2 = Light.CorrectColor(R, G, B);
-            //Console.WriteLine(color2);
+         
             return color2;
         }
 

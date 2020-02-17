@@ -63,6 +63,7 @@
     <Compile Include="Engine\Mesh\GeometryProvider.cs" />
     <Compile Include="Engine\Mesh\Mesh.cs" />
     <Compile Include="Engine\Mesh\ModelVertex.cs" />
+    <Compile Include="Engine\Mesh\MySphere.cs" />
     <Compile Include="Engine\Mesh\NewTriangle.cs" />
     <Compile Include="Engine\Mesh\Sphere.cs" />
     <Compile Include="Engine\Shading\ConstantShading.cs" />
@@ -77,10 +78,10 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="GlobalData.cs" />
-    <Compile Include="Lights\Light.cs" />
-    <Compile Include="Lights\PointLight.cs" />
-    <Compile Include="Lights\Reflector.cs" />
-    <Compile Include="Lights\VectorLight.cs" />
+    <Compile Include="Engine\Lights\Light.cs" />
+    <Compile Include="Engine\Lights\PointLight.cs" />
+    <Compile Include="Engine\Lights\Reflector.cs" />
+    <Compile Include="Engine\Lights\VectorLight.cs" />
     <Compile Include="ProjectInitializer.cs" />
     <Compile Include="Transformations\CameraTransformation.cs" />
     <Compile Include="Transformations\Rotation.cs" />

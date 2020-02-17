@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GK_4.Engine
 {
-    class Camera
+    public class Camera
     {
         public Vector<double> Position { get; set; }
         public Vector<double> Target { get; set; }

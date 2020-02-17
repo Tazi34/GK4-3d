@@ -11,11 +11,13 @@ namespace GK_4.Engine.Shading
 {
     public abstract class Shading
     {
+        protected Camera Camera { get; set; }
         private NewTriangle currentTriangle;
         public List<Light> Lights { get; set; }
 
-        protected Shading(NewTriangle currentTriangle,List<Light> lights)
+        protected Shading(NewTriangle currentTriangle,List<Light> lights, Camera camera)
         {
+            Camera = camera;
             Lights = lights;
             CurrentTriangle = currentTriangle;
         }
