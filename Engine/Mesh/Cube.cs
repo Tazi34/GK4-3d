@@ -6,21 +6,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GK_4.Engine.Mesh
+namespace GK_4.Engine
 {
     public class Cube : Mesh
     {
         public Cube() {
-
+			double a = 0;
 			double[][] verticesArray = {
-				new double[] {0, 0, 0 , 1},
-				new double[] {1, 0, 0 , 1},
-				new double[] {1, 1, 0 , 1},
-				new double[] {0, 1, 0 , 1},
-				new double[] {0, 1, 1 , 1},
-				new double[] {1, 1, 1 , 1},
-				new double[] {1, 0, 1 , 1},
-				new double[] { 0, 0, 1, 1 }
+				new double[] {0-a, 0-a, 0-a , 1},
+				new double[] {1-a, 0-a, 0-a , 1},
+				new double[] {1-a, 1-a, 0-a , 1},
+				new double[] {0-a, 1-a, 0-a , 1},
+				new double[] {0-a, 1-a, 1-a , 1},
+				new double[] {1-a, 1-a, 1-a , 1},
+				new double[] {1-a, 0-a, 1-a , 1},
+				new double[] {0-a, 0-a, 1-a, 1 }
 			};
 
 			Vertices = verticesArray.Select((el) => CreateVector.Dense(el)).ToList();
@@ -52,7 +52,7 @@ namespace GK_4.Engine.Mesh
 
 
 
-				return new NewTriangle
+				return new Triangle
 				{
 					A = new ModelVertex { Position = A, NormalVector = normal },
 					B = new ModelVertex { Position = B, NormalVector = normal },

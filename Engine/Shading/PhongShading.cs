@@ -1,4 +1,4 @@
-﻿using GK_4.Engine.Mesh;
+﻿
 using GK_4.Lights;
 using MathNet.Numerics.LinearAlgebra;
 using System;
@@ -7,12 +7,13 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GK_4.Engine.Cameras;
 
 namespace GK_4.Engine.Shading
 {
     class PhongShading : Shading
     {
-        public PhongShading(NewTriangle currentTriangle, List<Light> lights,Camera camera) : base(currentTriangle, lights,camera)
+        public PhongShading(Triangle currentTriangle, List<Light> lights,Camera camera) : base(currentTriangle, lights,camera)
         {
             CurrentTriangle = currentTriangle;
         }
@@ -26,7 +27,7 @@ namespace GK_4.Engine.Shading
 
             foreach (var l in Lights)
             {
-                var color = (l as PointLight).CalculateLight(CurrentTriangle, CreateVector.Dense(new double[] {x,y,z,1 }), CurrentTriangle.A.NormalVector,Camera.Position);
+                var color = l.CalculateLightForPoint(CurrentTriangle, CreateVector.Dense(new double[] {x,y,z,1 }), CurrentTriangle.A.NormalVector,Camera.Position);
                 R += color.R;
                 B += color.B;
                 G += color.G;

@@ -2,9 +2,12 @@
 using MathNet.Numerics.LinearAlgebra;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GK_4.Engine.Cameras;
+
 
 namespace GK_4.Transformations
 {
@@ -12,18 +15,13 @@ namespace GK_4.Transformations
     {
    
         public Camera Camera {
-            get
-            {
-                return camera;
-            }
+            get => camera;
 
             set {
                 camera = value;
+                camera.PropertyChanged += OnCameraChanged;
                 CalculateMatrix();
             }
-        }
-        public void Update() {
-            CalculateMatrix();
         }
 
         private Camera camera;
@@ -31,9 +29,13 @@ namespace GK_4.Transformations
         public CameraTransformation(Camera camera)
         {
             Camera = camera;
+      
+        }
+
+        private void OnCameraChanged(object sender, PropertyChangedEventArgs e)
+        {
             CalculateMatrix();
         }
-      
 
         protected override void CalculateMatrix()
         {

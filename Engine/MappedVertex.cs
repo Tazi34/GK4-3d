@@ -1,4 +1,4 @@
-﻿using GK_4.Engine.Mesh;
+﻿
 using MathNet.Numerics.LinearAlgebra;
 using System;
 using System.Collections.Generic;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GK_4.Engine
 {
-    class MappedVertex : ModelVertex
+    public class MappedVertex : ModelVertex
     {
         public Vector<double> ProjectedPosition;
 

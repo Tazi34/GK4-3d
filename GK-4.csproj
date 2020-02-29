@@ -57,20 +57,24 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Engine\AlgebraUtils.cs" />
-    <Compile Include="Engine\Camera.cs" />
+    <Compile Include="Engine\Cameras\Camera.cs" />
+    <Compile Include="Engine\Cameras\CameraRotator.cs" />
+    <Compile Include="Engine\Cameras\FollowingCamera.cs" />
+    <Compile Include="Engine\DirectBitmap.cs" />
     <Compile Include="Engine\MappedVertex.cs" />
+    <Compile Include="Engine\MeshEngine.cs" />
     <Compile Include="Engine\Mesh\Cube.cs" />
     <Compile Include="Engine\Mesh\GeometryProvider.cs" />
     <Compile Include="Engine\Mesh\Mesh.cs" />
     <Compile Include="Engine\Mesh\ModelVertex.cs" />
-    <Compile Include="Engine\Mesh\MySphere.cs" />
-    <Compile Include="Engine\Mesh\NewTriangle.cs" />
+    <Compile Include="Engine\Mesh\Triangle.cs" />
     <Compile Include="Engine\Mesh\Sphere.cs" />
+    <Compile Include="KeyHandler.cs" />
+    <Compile Include="Scene\SceneCalculator.cs" />
     <Compile Include="Engine\Shading\ConstantShading.cs" />
     <Compile Include="Engine\Shading\GouraudShading.cs" />
     <Compile Include="Engine\Shading\PhongShading.cs" />
     <Compile Include="Engine\Shading\Shading.cs" />
-    <Compile Include="Engine\Triangle.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -81,12 +85,13 @@
     <Compile Include="Engine\Lights\Light.cs" />
     <Compile Include="Engine\Lights\PointLight.cs" />
     <Compile Include="Engine\Lights\Reflector.cs" />
-    <Compile Include="Engine\Lights\VectorLight.cs" />
     <Compile Include="ProjectInitializer.cs" />
+    <Compile Include="Scene\Scene.cs" />
+    <Compile Include="Scene\SceneInitializer.cs" />
+    <Compile Include="Scene\ScenePainter.cs" />
     <Compile Include="Transformations\CameraTransformation.cs" />
-    <Compile Include="Transformations\Rotation.cs" />
     <Compile Include="Transformations\Rotations\YRotation.cs" />
-    <Compile Include="Transformations\RotationTransformation.cs" />
+    <Compile Include="Transformations\ModelTransformationProvider.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Transformations\ProjectionTransformation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -119,5 +124,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

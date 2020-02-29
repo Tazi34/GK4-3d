@@ -6,12 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GK_4.Engine.Mesh
-{
+namespace GK_4.Engine { 
     class Sphere : Mesh
     {
         public Sphere() {
-            Triangles = new List<NewTriangle>();
+            Triangles = new List<Triangle>();
 
             List<Vector<double>> vectors = new List<Vector<double>>();
             List<int> indices = new List<int>();
@@ -36,7 +35,7 @@ namespace GK_4.Engine.Mesh
                 //var normal = AlgebraUtils.CalculateNormalVector(Vertices[indices[i]], Vertices[indices[i + 1]], Vertices[indices[i + 2]]);
                 
                 Triangles.Add(
-                    new NewTriangle
+                    new Triangle
                     {
                         A = new ModelVertex { Position = Vertices[indices[i]], NormalVector = CalculateNormalVector(Vertices[indices[i]]) },
                         B = new ModelVertex { Position = Vertices[indices[i + 1]], NormalVector = CalculateNormalVector(Vertices[indices[i+1]]) },

@@ -1,4 +1,7 @@
-﻿using System;
+﻿
+using GK_4.Engine;
+using MathNet.Numerics.LinearAlgebra;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -28,6 +31,8 @@ namespace GK_4.Lights
             return Color.FromArgb(R, G, B);
         }
 
+        public abstract Color CalculateLightForTriangle(Triangle triangle);
+        public abstract Color CalculateLightForPoint(Triangle triangle, Vector<double> point, Vector<double> normal, Vector<double> cameraPosition);
 
         protected Light()
         {

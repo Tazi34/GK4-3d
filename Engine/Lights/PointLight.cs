@@ -1,5 +1,5 @@
 ﻿using GK_4.Engine;
-using GK_4.Engine.Mesh;
+
 using MathNet.Numerics.LinearAlgebra;
 using System;
 using System.Collections.Generic;
@@ -15,10 +15,10 @@ namespace GK_4.Lights
 
         public Vector<double> Position { get; set; }
         //Constant shading
-        public Color CalculateLight(NewTriangle triangle) {
+        public override Color CalculateLightForTriangle(Triangle triangle) {
             //Distracted light
             double kd = 1;
-            Vector<double> L = CreateVector.Dense(new double[] { 0, 0, 1, 0 });
+            Vector<double> L = CreateVector.Dense(new double[] {0, 1, 0, 0 });
 
             var N = triangle.A.NormalVector;
             var Io = triangle.Color;
@@ -52,14 +52,15 @@ namespace GK_4.Lights
 
             return Light.CorrectColor(R, G, B);
         }
-        public Color CalculateLight(NewTriangle triangle,Vector<double> point, Vector<double> normal, Vector<double> cameraPosition)
+        public override Color CalculateLightForPoint(Triangle triangle,Vector<double> point, Vector<double> normal, Vector<double> cameraPosition)
         {
             double kd = 1;
             Vector<double> L = Position - point;
             L = L.Divide(L.Norm(2));
-
+           // Console.WriteLine(point);
             var N = normal;
             var Io = triangle.Color;
+           
 
             double NL = (N * L);
             var distractedR = (kd * Io.R * Color.R * NL / 255);

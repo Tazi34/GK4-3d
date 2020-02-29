@@ -1,6 +1,7 @@
 ﻿using MathNet.Numerics.LinearAlgebra;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,30 +18,31 @@ namespace GK_4
         private double e;
         public double Width
         {
-            get
-            { return width; }
+            get => width;
             set
             {
                 width = value;
-                aspectRatio = height / width;
-                SetParameters();
+                aspectRatio =  (height / width);
+                CalculateMatrix();
             }
         }
         public double Height
         {
-            get
-            { return height; }
+            get => height;
             set
             {
                 height = value;
                 aspectRatio = height/width;
-                SetParameters();
+                CalculateMatrix();
             }
         }
         private double width;
         private double height;
 
-        private void SetParameters() {
+
+
+        protected override void CalculateMatrix()
+        {
             Matrix[0, 0] = e;
             Matrix[1, 1] = e / aspectRatio;
             Matrix[2, 2] = (-1) * (F + N) / (F - N);
@@ -48,26 +50,28 @@ namespace GK_4
             Matrix[3, 2] = -1;
             Matrix[3, 3] = 0;
         }
-
-        protected override void CalculateMatrix()
-        {
-            throw new NotImplementedException();
-        }
-
+        
         public ProjectionTransformation(int width, int height) {
+
             N = 1;
             F = 45;
-            this.width = width;
-            this.height = height;
-            aspectRatio = height / width;
+           
             FOV = 45;
             
             e = 1 / Math.Tan(Math.PI * FOV / 180 / 2);
             Matrix = Matrix<double>.Build.Dense(4, 4, 0);
-            SetParameters();
+            SetSize(width, height);
 
 
         }
+        public void SetSize(int width, int height)
+        {
+            this.width = width;
+            this.height = height;
+            aspectRatio = (double) height  / (double) width;
+            CalculateMatrix();
+        }
+
 
     }
 }

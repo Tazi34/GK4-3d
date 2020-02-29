@@ -1,11 +1,11 @@
-﻿using GK_4.Engine.Mesh;
+﻿
+
+
 using GK_4.Lights;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using GK_4.Engine.Cameras;
 
 namespace GK_4.Engine.Shading
 {
@@ -14,7 +14,7 @@ namespace GK_4.Engine.Shading
         private Color ColorA { get; set; }
         private Color ColorB { get; set; }
         private Color ColorC { get; set; }
-        public override NewTriangle CurrentTriangle
+        public override Triangle CurrentTriangle
         {
             set
             {
@@ -36,7 +36,7 @@ namespace GK_4.Engine.Shading
             
             foreach (var l in Lights)
             {
-                var color = (l as PointLight).CalculateLight(CurrentTriangle, modelVertex.Position, modelVertex.NormalVector,Camera.Position);
+                var color = l.CalculateLightForPoint(CurrentTriangle, modelVertex.Position, modelVertex.NormalVector,Camera.Position);
                 R += color.R;
                 B += color.B;
                 G += color.G;
@@ -73,7 +73,7 @@ namespace GK_4.Engine.Shading
             var color = Light.CorrectColor(r, g, b);
             return color;
         }
-        public GouraudShading(NewTriangle currentTriangle, List<Light> lights,Camera camera) : base(currentTriangle,lights,camera) {
+        public GouraudShading(Triangle currentTriangle, List<Light> lights,Camera camera) : base(currentTriangle,lights,camera) {
             CurrentTriangle = currentTriangle;
         }
 
