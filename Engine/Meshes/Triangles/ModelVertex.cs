@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GK_4.Engine.Mesh
+namespace GK_4.Engine.Meshes.Triangles
 {
     public class ModelVertex
     {

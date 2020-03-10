@@ -2,40 +2,36 @@
 using MathNet.Numerics.LinearAlgebra;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GK_4.Engine.Cameras;
+using GK_4.Engine.Utils;
+
 
 namespace GK_4.Transformations
 {
-    class CameraTransformation : Transformation
+    public class CameraTransformation : Transformation
     {
-   
         public Camera Camera {
-            get
-            {
-                return camera;
-            }
-
+            get => camera;
             set {
                 camera = value;
+                camera.PropertyChanged += OnCameraChanged;
                 CalculateMatrix();
             }
         }
-        public void Update() {
-            CalculateMatrix();
-        }
-
         private Camera camera;
-
         public CameraTransformation(Camera camera)
         {
             Camera = camera;
+        }
+        private void OnCameraChanged(object sender, PropertyChangedEventArgs e)
+        {
             CalculateMatrix();
         }
-      
-
-        protected override void CalculateMatrix()
+        protected virtual void CalculateMatrix()
         {
             var cPos = Camera.Position;
             var cTarget = Camera.Target;
@@ -43,28 +39,12 @@ namespace GK_4.Transformations
 
             var cZ = (cPos - cTarget).Normalize(2);
             var cX = AlgebraUtils.CrossProduct(cUp, cZ).Normalize(2);
-            //Console.WriteLine("cX " + cX);
-
-
             var cY = AlgebraUtils.CrossProduct(cZ, cX).Normalize(2);
-
-
-            /*    Console.WriteLine("cPos " + cPos);
-                Console.WriteLine("cTarget " + cTarget);
-                Console.WriteLine("cUp " + cUp);*/
-
-            /*            Console.WriteLine("cX " + cX);
-                        Console.WriteLine("cY " + cY);*/
-
-            /*Console.WriteLine("cZ " + (cPos - cTarget));
-            Console.WriteLine("cZ " + cZ);*/
-
-
+            
             Matrix[0, 0] = cX[0];
             Matrix[1, 0] = cX[1];
             Matrix[2, 0] = cX[2];
-
-
+            
             Matrix[0, 1] = cY[0];
             Matrix[1, 1] = cY[1];
             Matrix[2, 1] = cY[2];
@@ -78,8 +58,6 @@ namespace GK_4.Transformations
             Matrix[2, 3] =  cPos[2];
      
             Matrix = Matrix.Inverse();
- 
-
         }
 
    

@@ -10,18 +10,11 @@ namespace GK_4
     public abstract class Transformation
     {
         public Matrix<double> Matrix { get; set; }
-
-        protected Transformation(Matrix<double> matrix)
-        {
-            Matrix = matrix;
-        }
-
+        
         protected Transformation()
         {
             Matrix = CreateMatrix.DenseIdentity<double>(4);
         }
-
-        protected abstract void CalculateMatrix();
 
         public Vector<double> transform(Vector<double> v) {
             return Matrix * v;

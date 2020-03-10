@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
+using GK_4.Engine.Meshes.Triangles;
+using MathNet.Numerics.LinearAlgebra;
 
 namespace GK_4.Lights
 {
     public abstract class Light
     {
-        public static Color CorrectColor(int R, int G,int B)
+        public static Color CorrectColor(int R, int G, int B)
         {
             if (R > 255)
                 R = 255;
@@ -28,6 +25,9 @@ namespace GK_4.Lights
             return Color.FromArgb(R, G, B);
         }
 
+        // public abstract Color CalculateLightForTriangle(Triangle triangle);
+        public abstract Color CalculateLightForPoint(Triangle triangle, Vector<double> point, Vector<double> normal,
+            Vector<double> cameraPosition);
 
         protected Light()
         {
@@ -36,5 +36,4 @@ namespace GK_4.Lights
 
         public Color Color { get; set; }
     }
-   
 }

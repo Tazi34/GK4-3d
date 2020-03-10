@@ -1,20 +1,21 @@
-﻿using GK_4.Engine.Mesh;
+﻿
+
+
 using GK_4.Lights;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using GK_4.Engine.Cameras;
+using GK_4.Engine.Meshes.Triangles;
 
-namespace GK_4.Engine.Shading
+namespace GK_4.Engine.Shaders
 {
-    class GouraudShading : Shading
+    class GouraudShader : Shader
     {
         private Color ColorA { get; set; }
         private Color ColorB { get; set; }
         private Color ColorC { get; set; }
-        public override NewTriangle CurrentTriangle
+        public override Triangle CurrentTriangle
         {
             set
             {
@@ -36,7 +37,7 @@ namespace GK_4.Engine.Shading
             
             foreach (var l in Lights)
             {
-                var color = (l as PointLight).CalculateLight(CurrentTriangle, modelVertex.Position, modelVertex.NormalVector,Camera.Position);
+                var color = l.CalculateLightForPoint(CurrentTriangle, modelVertex.Position, modelVertex.NormalVector,Scene.Camera.Position);
                 R += color.R;
                 B += color.B;
                 G += color.G;
@@ -73,22 +74,19 @@ namespace GK_4.Engine.Shading
             var color = Light.CorrectColor(r, g, b);
             return color;
         }
-        public GouraudShading(NewTriangle currentTriangle, List<Light> lights,Camera camera) : base(currentTriangle,lights,camera) {
-            CurrentTriangle = currentTriangle;
-        }
+     
 
 
-        public override Color GetColor(int x, int y, int z )
+        public override Color GetColor(int x, int y, int z)
         {
             var color = GetInterpolatedColor(x, y);
             return color;
         }
-
-
-
-
-
-
+        
         //private void CalculateColor
+        public GouraudShader(List<Light> lights, Scene.Scene scene, Triangle currentTriangle = null) : base(lights, scene, currentTriangle)
+        {
+            CurrentTriangle = currentTriangle;
+        }
     }
 }

@@ -1,11 +1,6 @@
 ﻿using MathNet.Numerics.LinearAlgebra;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace GK_4.Engine
+namespace GK_4.Engine.Utils
 {
     class AlgebraUtils
     {
@@ -30,5 +25,22 @@ namespace GK_4.Engine
             normalVector.Normalize(2);
             return normalVector;
         }
+        public static (double alfa,double beta, double gamma) Barycentric(Vector<double> p, Vector<double> a, Vector<double> b,Vector<double> c)
+        {
+            
+            Vector<double> AB = b - a, AC = c - a, AP = p - a;
+            double d00 = AB*AB;
+            double d01 = AB*AC;
+            double d11 = AC*AC;
+            double d20 = AP*AB;
+            double d21 = AP*AC;
+            double denom = d00 * d11 - d01 * d01;
+            var v = (d11 * d20 - d01 * d21) / denom;
+            var w = (d00 * d21 - d01 * d20) / denom;
+            var u = 1.0f - v - w;
+            return (v, w, u);
+        }
+        
+       
     }
 }
